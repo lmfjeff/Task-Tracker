@@ -28,7 +28,7 @@ const Access = ({ isAuthenticated, profile }) => {
 }
 
 Access.propTypes = {
-    isAuthenticated: PropTypes.bool.isRequired,
+    isAuthenticated: PropTypes.bool,
     profile: PropTypes.object
 }
 

@@ -13,7 +13,7 @@ function auth (req, res, next) {
         req.profile = decoded
         next()
     } catch (e) {
-        req.status(400).json({msg:'Token is not valid'})
+        res.status(400).json({msg:'Token is not valid'})
     }
 
 }
