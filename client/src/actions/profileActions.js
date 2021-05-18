@@ -12,7 +12,7 @@ import {
     LOGIN_SUCCESS,
     LOGIN_FAIL
 } from '../actions/types'
-import { clearError, returnError } from './errorAction'
+import { returnError } from './errorAction'
 import axios from 'axios'
 
 export const getProfile = () => (dispatch, getState) => {
@@ -75,11 +75,11 @@ export const logout = () => {
     }
 }
 
-export const deleteTask = (id) => (dispatch, getState) => {
-    axios.delete(`/profile/task/${id}`, tokenConfig(getState))
+export const addTask = (taskToAdd) => (dispatch, getState) => {
+    axios.post('/profile/task', taskToAdd, tokenConfig(getState))
         .then(res => {
             dispatch({
-                type: DELETE_TASK,
+                type: ADD_TASK,
                 payload: res.data
             })
         })
@@ -91,11 +91,27 @@ export const deleteTask = (id) => (dispatch, getState) => {
         })
 }
 
-export const addTask = (taskToAdd) => (dispatch, getState) => {
-    axios.post('/profile/task', taskToAdd, tokenConfig(getState))
+export const changeTask = (task) => (dispatch, getState) => {
+    axios.put('/profile/task', task, tokenConfig(getState))
         .then(res => {
             dispatch({
-                type: ADD_TASK,
+                type: CHANGE_TASK,
+                payload: res.data
+            })
+        })
+        .catch(err => {
+            dispatch(returnError(err.response.data, err.response.status))
+            dispatch({
+                type: AUTH_ERROR
+            })
+        })
+}
+
+export const deleteTask = (id) => (dispatch, getState) => {
+    axios.delete(`/profile/task/${id}`, tokenConfig(getState))
+        .then(res => {
+            dispatch({
+                type: DELETE_TASK,
                 payload: res.data
             })
         })

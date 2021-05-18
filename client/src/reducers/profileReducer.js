@@ -32,6 +32,7 @@ export default function (state = initialState, action) {
             }
         case DELETE_TASK:
         case ADD_TASK:
+        case CHANGE_TASK:
             return {
                 ...state,
                 ...action.payload,

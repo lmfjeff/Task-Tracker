@@ -5,6 +5,7 @@ import AddTask from './components/AddTask'
 import Footer from './components/Footer'
 import About from './components/About'
 
+import { Container } from 'react-bootstrap'
 import { Provider } from 'react-redux'
 import store from './store'
 import TaskList from './components/TaskList'
@@ -18,7 +19,7 @@ function App() {
   return (
     <Provider store={store}>
       <Router>
-        <div className="container">
+        <Container>
           <Header
             onAdd={() => setShowAddTask(!showAddTask)}
             showAdd={showAddTask}
@@ -34,7 +35,7 @@ function App() {
           <Route path='/about' component={About} />
           <Footer />
           <Access />
-        </div>
+        </Container>
       </Router>
     </Provider>
 

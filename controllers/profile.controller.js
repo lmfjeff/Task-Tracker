@@ -97,9 +97,11 @@ router.route('/register').post((req, res) => {
 
 })
 
-router.route('/logout').get((req,res) => {
+router.route('/logout').get((req, res) => {
     res.send('logout')
 })
+
+
 
 router.use(auth)
 
@@ -120,6 +122,20 @@ router.route('/task').post((req, res) => {
                 }))
                 .catch(err => res.status(400).json("Error! " + err))
         })
+})
+
+router.route('/task').put((req, res) => {
+
+    Profile.findById(req.profile.id)
+        .findOneAndUpdate({ 'task._id': req.body.task._id },
+            { '$set': { 'task.$': req.body.task } },
+            { new: true })
+        .select('-password')
+        .then(profile => {
+            res.json({profile})
+        })
+        .catch(err => res.status(400).json("Error! " + err))
+
 })
 
 router.route('/task/:id').delete((req, res) => {
@@ -144,7 +160,7 @@ router.route('/').get((req, res) => {
     Profile.findById(req.profile.id)
         .select('-password')
         .then(profile => {
-            res.json({profile})
+            res.json({ profile })
         })
         .catch(err => res.status(400).json("Error! " + err))
 })

@@ -1,8 +1,9 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
-import { Container, ListGroup, ListGroupItem, Button } from 'react-bootstrap'
-import { getProfile, deleteTask } from '../actions/profileActions'
+import { Container, ListGroup } from 'react-bootstrap'
+import { getProfile, deleteTask, changeTask } from '../actions/profileActions'
 import PropTypes from 'prop-types'
+import TaskItem from './TaskItem'
 
 const TaskList = ({ getProfile, profile, deleteTask }) => {
 
@@ -10,6 +11,9 @@ const TaskList = ({ getProfile, profile, deleteTask }) => {
         getProfile();
     }, [getProfile])
 
+    const handleUpdate = (task) => {
+        changeTask(task)
+    }
 
     const handleDelete = (taskId) => {
         deleteTask(taskId)
@@ -18,25 +22,19 @@ const TaskList = ({ getProfile, profile, deleteTask }) => {
     let taskList
 
     if (profile !== null) {
-        const {task} = profile
+        const { task } = profile
         taskList = (
-            <Container>
+            <Container fluid >
                 <h2>{profile.name} </h2>
-                <h3>{task.length===0? "No Task to show": ""} </h3>
+                <h3>{task.length === 0 ? "No Task to show" : ""} </h3>
 
                 <ListGroup>
-                    {   task &&
-                        task.map(({ _id, text, day, reminder }) => (
-                            <ListGroupItem key={_id}>
-                                <h3>
-                                    {text}
-                                    <Button onClick={() => handleDelete(_id)}>
-                                        Cancel
-                                </Button>
-                                </h3>
-                                <p>{day}</p>
-                            </ListGroupItem>
-                        ))
+                    {task &&
+                        task.map(
+                            (task) => (
+                                <TaskItem task={task} key={task._id} />
+                            )
+                        )
                     }
                 </ListGroup>
             </Container>
