@@ -31,9 +31,9 @@ connection.once('open', () => {
 const PORT = process.env.PORT || 5000;
 
 app.get('/ip', (req,res)=> {
-    let ip = req.ip
-    // console.log(ip)
-    res.send(`ip is ${ip}`)
+    let ip = req.headers["x-forwarded-for"]
+    let ipAddr = req.socket.remoteAddress
+    res.send(`req.headers["x-forwarded-for"] is ${ip} \r\n req.socket.remoteAddress is ${ipAddr}`)
 })
 
 // app.use('/task', userRoutes)
