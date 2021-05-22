@@ -10,7 +10,8 @@ import {
     REGISTER_FAIL,
     LOGOUT_SUCCESS,
     LOGIN_SUCCESS,
-    LOGIN_FAIL
+    LOGIN_FAIL,
+    DELETE_ACCOUNT
 } from '../actions/types'
 import { returnError } from './errorAction'
 import axios from 'axios'
@@ -73,6 +74,22 @@ export const logout = () => {
     return {
         type: LOGOUT_SUCCESS
     }
+}
+
+export const deleteAccount = () => (dispatch, getState) => {
+    axios.post('/profile/delete', null, tokenConfig(getState))
+        .then(() => {
+            dispatch({
+                type: DELETE_ACCOUNT
+            })
+        })
+        .catch(err => {
+            dispatch(returnError(err.response.data, err.response.status))
+            dispatch({
+                type: AUTH_ERROR
+            })
+        })
+
 }
 
 export const addTask = (taskToAdd) => (dispatch, getState) => {

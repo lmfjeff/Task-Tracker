@@ -10,7 +10,9 @@ import { Provider } from 'react-redux'
 import store from './store'
 import TaskList from './components/TaskList'
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Access from './components/Access'
+import { deleteAccount } from './actions/profileActions'
+import DeleteModal from './components/DeleteModal'
+import ErrorToast from './components/ErrorToast'
 
 function App() {
 
@@ -19,7 +21,8 @@ function App() {
   return (
     <Provider store={store}>
       <Router>
-        <Container>
+        <div className='taskbox'>
+          <ErrorToast />
           <Header
             onAdd={() => setShowAddTask(!showAddTask)}
             showAdd={showAddTask}
@@ -34,8 +37,8 @@ function App() {
 
           <Route path='/about' component={About} />
           <Footer />
-          <Access />
-        </Container>
+          <DeleteModal />
+        </div>
       </Router>
     </Provider>
 

@@ -30,7 +30,8 @@ const AddTask = ({ addTask, profile }) => {
             'task': {
                 'text': text,
                 'day': day,
-                'reminder': reminder
+                'reminder': reminder,
+                'date': Date.now()
             }
         }
 
@@ -43,7 +44,7 @@ const AddTask = ({ addTask, profile }) => {
     
     if (profile !== null) {
         return (
-            <Form onSubmit={onSubmit}>
+            <Form onSubmit={onSubmit} className='border border-info rounded p-3 mb-5'>
                 <FormGroup controlId="name">
                     <FormLabel>Task</FormLabel>
                     <FormControl

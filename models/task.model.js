@@ -5,6 +5,7 @@ const taskSchema = new Schema({
     text: { type: String, required: true },
     day: String,
     reminder: { type: Boolean, required: true },
+    date: {type: Number}
 })
 
 mongoose.pluralize(null)

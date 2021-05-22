@@ -101,9 +101,13 @@ router.route('/logout').get((req, res) => {
     res.send('logout')
 })
 
-
-
 router.use(auth)
+
+router.route('/delete').post((req, res) => {
+    Profile.findByIdAndDelete(req.profile.id)
+        .then(() => res.json('Delete success!'))
+        .catch(err => res.status(400).json("Error! " + err))
+})
 
 router.route('/task').post((req, res) => {
     Profile.findById(req.profile.id)
@@ -132,7 +136,7 @@ router.route('/task').put((req, res) => {
             { new: true })
         .select('-password')
         .then(profile => {
-            res.json({profile})
+            res.json({ profile })
         })
         .catch(err => res.status(400).json("Error! " + err))
 

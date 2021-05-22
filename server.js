@@ -30,6 +30,12 @@ connection.once('open', () => {
 
 const PORT = process.env.PORT || 5000;
 
+app.get('/ip', (req,res)=> {
+    let ip = req.ip
+    // console.log(ip)
+    res.send(`ip is ${ip}`)
+})
+
 // app.use('/task', userRoutes)
 app.use('/profile', profileRoutes)
 
