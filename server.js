@@ -31,7 +31,7 @@ connection.once('open', () => {
 
 const PORT = process.env.PORT || 5000;
 
-app.get('/ip', (req,res)=> {
+app.get('/ip', (req, res) => {
     let ip = req.headers["x-forwarded-for"]
     let ipAddr = req.socket.remoteAddress
     res.send(`req.headers["x-forwarded-for"] is ${ip} \r\n req.socket.remoteAddress is ${ipAddr}`)
@@ -42,11 +42,13 @@ app.use('/profile', profileRoutes)
 
 if (process.env.NODE_ENV === 'production') {
     app.use(express.static('client/build'))
-
     app.get('*', (req, res) => {
-        res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))
+        // res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))
+        res.redirect('/')
     })
 }
+
+
 
 app.listen(PORT, () => {
     console.log(`Server listening on ${PORT}`);

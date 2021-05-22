@@ -5,12 +5,10 @@ import AddTask from './components/AddTask'
 import Footer from './components/Footer'
 import About from './components/About'
 
-import { Container } from 'react-bootstrap'
 import { Provider } from 'react-redux'
 import store from './store'
 import TaskList from './components/TaskList'
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { deleteAccount } from './actions/profileActions'
 import DeleteModal from './components/DeleteModal'
 import ErrorToast from './components/ErrorToast'
 
