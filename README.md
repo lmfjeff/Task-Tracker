@@ -4,6 +4,8 @@
 * [About this Project](#about-this-project)
 * [Goal of this Project](#goal-of-this-project)
 * [Prerequisite](#prerequisite)
+* [Installation](#installation)
+* [Library/Framework Used](#libraryframework-used)
 * [Reference](#reference)
 
 ## About this Project
